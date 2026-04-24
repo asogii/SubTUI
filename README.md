@@ -41,6 +41,7 @@ For setup, configuration, keybinds, and more, check out the **[Wiki](https://git
 
 ![Login](./screenshots/login.png)
 ![Queue](./screenshots/queue_view.png)
+![Media Player](./screenshots/media_player.png)
 
 ## Contributing
 
