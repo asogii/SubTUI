@@ -115,10 +115,7 @@ func (m model) BaseView() string {
 		Render(sidebarContent(m, mainHeight, sidebarWidth))
 
 	// MAIN VIEW
-	mainBorder := borderStyle
-	if m.focus == focusMain {
-		mainBorder = activeBorderStyle
-	}
+	mainBorder := m.buildMainViewBorder(mainWidth)
 
 	mainContent := ""
 	if m.loading &&
@@ -582,6 +579,41 @@ func mainArtistContent(m model, width int, height int) string {
 		subtleStyle.Render("  "+strings.Repeat("-", availableWidth)),
 		artistRows,
 	)
+}
+
+func (m model) buildMainViewBorder(width int) lipgloss.Style {
+	base := borderStyle
+	if m.focus == focusMain {
+		base = activeBorderStyle
+	}
+
+	listLen := 0
+	switch m.displayMode {
+	case displaySongs:
+		if m.viewMode == viewQueue {
+			listLen = len(m.queue)
+		} else {
+			listLen = len(m.songs)
+		}
+	case displayAlbums:
+		listLen = len(m.albums)
+	case displayArtist:
+		listLen = len(m.artists)
+	}
+
+	if listLen > 0 {
+		listStatus := fmt.Sprintf(" %d/%d ", m.cursorMain + 1, listLen)
+
+		b := lipgloss.RoundedBorder()
+		bLen := max(width - len(listStatus), 0)
+		bLeft := bLen / 2
+		b.Bottom = strings.Repeat("─", bLeft ) +
+			listStatus + strings.Repeat("─", bLen - bLeft)
+
+		return base.Border(b)
+	}
+
+	return base
 }
 
 // Generate the footer
