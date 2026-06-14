@@ -5,6 +5,10 @@ desktop_notifications = true
 discord_rich_presence = true
 mouse_support         = false
 default_volume = -1  # 0-100 for a preset initial volume, -1 to disable
+startup_active = 'search' # Options: 'search', 'side', 'main', 'player'
+startup_player_view = false
+play_on_startup = false
+startup_loop_mode = 'no' # Options: 'no', 'all', 'one', 'keep'
 
 [theme]
 display_album_art  = true

@@ -14,6 +14,9 @@ func InitialModel() model {
 	ti.Width = 50
 
 	startMode := viewList
+	if api.AppConfig.App.StartUpPlayerView {
+		startMode = viewQueue
+	}
 	if api.AppServerConfig.Server.URL == "" ||
 		(api.AppServerConfig.Server.AuthMethod == "plaintext" && (api.AppServerConfig.Server.Username == "" || api.AppServerConfig.Server.Password == "")) ||
 		(api.AppServerConfig.Server.AuthMethod == "hashed" && (api.AppServerConfig.Server.Username == "" || api.AppServerConfig.Server.PasswordToken == "" || api.AppServerConfig.Server.PasswordSalt == "")) ||
