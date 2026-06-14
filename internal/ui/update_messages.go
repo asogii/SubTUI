@@ -230,9 +230,10 @@ func (m model) handleLoginResult(msg loginResultMsg) (tea.Model, tea.Cmd) {
 		player.SetVolume(api.AppConfig.App.Volume)
 	}
 
-	m.viewMode = viewList
-	m.focus = focusSearch
+	m.viewMode = viewQueue
+	m.focus = api.AppConfig.App.StartUpActive
 	m.loginErr = ""
+	m.playAfterLoad = api.AppConfig.App.PlayOnStartUp
 
 	return m, tea.Batch(
 		syncPlayerCmd(),

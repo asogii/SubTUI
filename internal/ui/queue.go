@@ -15,13 +15,21 @@ func formatDuration(seconds int) string {
 	return fmt.Sprintf("%d:%02d", minutes, secs)
 }
 
-func (m *model) playQueueIndex(index int, startPaused bool) tea.Cmd {
+func (m *model) playQueueIndex(index int, fromServer bool) tea.Cmd {
 	if index < 0 || index >= len(m.queue) {
 		return nil
 	}
 
 	m.queueIndex = index
 	song := m.queue[m.queueIndex]
+	startPaused := fromServer
+	if m.playAfterLoad {
+		startPaused = false
+		if m.viewMode == viewQueue {
+			m.cursorMain, m.mainOffset = seekToQueueIndex(*m)
+		}
+		m.playAfterLoad = false
+	}
 
 	playCmd := func() tea.Msg {
 		err := player.PlaySong(song.ID, startPaused)
@@ -45,9 +53,12 @@ func (m *model) playQueueIndex(index int, startPaused bool) tea.Cmd {
 		return nil
 	}
 
+	var saveCmd tea.Cmd
+	if !fromServer {
+		saveCmd = m.savePlayQueue()
+	}
 	return tea.Batch(
-		playCmd,
-		m.savePlayQueue(),
+		playCmd, saveCmd,
 	)
 }
 

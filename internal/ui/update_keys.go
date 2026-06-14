@@ -302,19 +302,21 @@ func focusSearchBar(m model) model {
 }
 
 func cycleFocus(m model, forward bool) model {
-	// Cycles Focus: Search -> Sidebar -> Main -> Song -> Search
-	if forward {
-		m.focus = (m.focus + 1) % 4
-	} else {
-		m.focus = (((m.focus-1)%4 + 4) % 4)
-	}
-
+	// Cycles Focus: Search -> Sidebar -> Main -> Song -> Sidebar
 	if m.focus == focusSearch {
-		m.textInput.Focus()
-	} else {
 		m.textInput.Blur()
+		if forward {
+			m.focus = focusSidebar
+		} else {
+			m.focus = focusSong
+		}
+	} else {
+		v := 2
+		if forward {
+			v = 1
+		}
+		m.focus = (m.focus - 1 + v) % 3 + 1
 	}
-
 	return m
 }
 
@@ -887,6 +889,11 @@ func cycleFilter(m model, forward bool) model {
 	return m
 }
 
+func seekToQueueIndex(m model) (int, int) {
+	return m.queueIndex, max(0, min(m.queueIndex - 2,
+		_getMainListLength(m) - _getMainVisibleRows(m)))
+}
+
 func toggleQueue(m model) model {
 	if m.focus != focusSearch {
 		switch m.viewMode {
@@ -894,9 +901,7 @@ func toggleQueue(m model) model {
 			m.viewMode = viewQueue
 			m.displayModePrev = m.displayMode
 			m.displayMode = displaySongs
-			m.cursorMain = m.queueIndex
-			m.mainOffset = max(0, min(m.queueIndex - 2,
-				_getMainListLength(m) - _getMainVisibleRows(m)))
+			m.cursorMain, m.mainOffset = seekToQueueIndex(m)
 		case viewQueue:
 			m.viewMode = viewList
 			m.displayMode = m.displayModePrev

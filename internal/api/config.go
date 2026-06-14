@@ -49,12 +49,16 @@ type Security struct {
 }
 
 type App struct {
-	ReplayGain      string `toml:"replaygain" comment:"Type of replaygain: 'track', 'album', 'no' https://mpv.io/manual/stable/#options-replaygain"`
-	GaplessPlayBack string `toml:"gapless_playback" comment:"Type of gapless playback: 'yes', 'no', 'weak' https://mpv.io/manual/stable/#options-gapless-audio"`
-	Notifications   bool   `toml:"desktop_notifications"`
-	DiscordRPC      bool   `toml:"discord_rich_presence"`
-	MouseSupport    bool   `toml:"mouse_support"`
-	Volume          int    `toml:"default_volume" comment:"0-100 for a preset initial volume, -1 to disable"`
+	ReplayGain        	string 	`toml:"replaygain" comment:"Type of replaygain: 'track', 'album', 'no' https://mpv.io/manual/stable/#options-replaygain"`
+	GaplessPlayBack  	string 	`toml:"gapless_playback" comment:"Type of gapless playback: 'yes', 'no', 'weak' https://mpv.io/manual/stable/#options-gapless-audio"`
+	Notifications     	bool   	`toml:"desktop_notifications"`
+	DiscordRPC        	bool   	`toml:"discord_rich_presence"`
+	MouseSupport  		bool   	`toml:"mouse_support"`
+	Volume            	int    	`toml:"default_volume" comment:"0-100 for a preset initial volume, -1 to disable"`
+	StartUpActive	  	int 	`toml:"startup_active" comment:"Which panel should be active on startup(int): 0:search, 1:side, 2:main', 3:player"`
+	StartUpPlayerView 	bool 	`toml:"startup_player_view"`
+	PlayOnStartUp		bool 	`toml:"play_on_startup"`
+	StartUpLoopMode		int		`toml:"startup_loop_mode" comment:"int: 0:no 1:all 2:one"`
 }
 
 type Theme struct {
