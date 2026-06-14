@@ -24,7 +24,7 @@ func InitialModel() model {
 	return model{
 		textInput:          ti,
 		songs:              []api.Song{},
-		focus:              focusSearch,
+		focus:              api.AppConfig.App.StartUpActive,
 		cursorMain:         0,
 		cursorSide:         0,
 		cursorPopup:        0,
@@ -38,12 +38,13 @@ func InitialModel() model {
 		lastPlayedSongPath: "",
 		loginInputs:        initialLoginInputs(),
 		lastKey:            "",
-		showMediaPlayer:    false,
+		showMediaPlayer:    api.AppConfig.App.StartUpPlayerView,
 		showHelp:           false,
 		showPlaylists:      false,
 		helpModel:          NewHelpModel(),
 		discordRPC:         api.AppConfig.App.DiscordRPC,
 		notify:             api.AppConfig.App.Notifications,
+		loopMode:           api.AppConfig.App.StartUpLoopMode,
 	}
 }
 

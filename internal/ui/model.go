@@ -63,9 +63,10 @@ type model struct {
 	discordInstance *integration.DiscordInstance
 
 	// Queue System
-	queue      []api.Song
-	queueIndex int
-	loopMode   int
+	queue         []api.Song
+	queueIndex    int
+	loopMode      int
+	playAfterLoad bool
 
 	// Stars
 	starredMap map[string]bool
