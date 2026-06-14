@@ -1370,11 +1370,24 @@ func mediaShowFavorites(m model, msg tea.Msg) (model, tea.Cmd) {
 		return typeInput(m, msg)
 	}
 
+	switch m.displayMode {
+	case displaySongs:
+		m.songsPrev = m.songs
+	case displayAlbums:
+		m.albumsPrev = m.albums
+	case displayArtist:
+		m.artistsPrev = m.artists
+	}
+	m.displayModePrev = m.displayMode
 	m.displayMode = displaySongs
 
 	m.songs = nil
 	m.viewMode = viewList
 	m.focus = focusMain
+	m.cursorMainPrev = m.cursorMain
+	m.cursorMain = 0
+	m.mainOffsetPrev = m.mainOffset
+	m.mainOffset = 0
 
 	return m, openLikedSongsCmd()
 }
