@@ -895,11 +895,8 @@ func toggleQueue(m model) model {
 			m.displayModePrev = m.displayMode
 			m.displayMode = displaySongs
 			m.cursorMain = m.queueIndex
-			if m.cursorMain > 2 {
-				m.mainOffset = m.cursorMain - 2
-			} else {
-				m.mainOffset = 0
-			}
+			m.mainOffset = max(0, min(m.queueIndex - 2,
+				_getMainListLength(m) - _getMainVisibleRows(m)))
 		case viewQueue:
 			m.viewMode = viewList
 			m.displayMode = m.displayModePrev

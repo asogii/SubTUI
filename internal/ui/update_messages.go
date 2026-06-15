@@ -269,7 +269,7 @@ func (m model) handleStatus(msg statusMsg) (tea.Model, tea.Cmd) {
 
 	// Queue ended
 	if m.playerStatus.Path == "" || m.playerStatus.Path == "<nil>" || len(m.queue) == 0 {
-		m.queue = []api.Song{}
+		// m.queue = []api.Song{}
 		m.lastPlayedSongPath = ""
 
 		// Clear MRPIS
