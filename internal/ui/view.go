@@ -613,7 +613,7 @@ func footerContent(m model) string {
 	var content string
 
 	if api.AppConfig.Theme.DisplayAlbumArt && m.coverArt != nil {
-		albumArt := m.coverMosaic.Render(m.coverArt)
+		albumArt := m.coverRenderer.Render(m.coverArt)
 		infoText := footerInformation(m, m.width-16)
 
 		content = lipgloss.JoinHorizontal(lipgloss.Left, "  ", albumArt, "  ", infoText)
@@ -876,7 +876,7 @@ func mediaPlayerSideContent(m model, width int, height int) string {
 	if showCoverArt && remainingHeight >= 3 {
 		coverArtHeight = remainingHeight - 2
 
-		coverArtStr := m.coverMosaic.Render(m.coverArt)
+		coverArtStr := m.coverRenderer.Render(m.coverArt)
 		coverArtStr = lipgloss.NewStyle().MaxHeight(coverArtHeight).Render(coverArtStr)
 
 		sections = append(sections, borderStyle.

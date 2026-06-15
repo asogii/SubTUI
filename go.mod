@@ -14,6 +14,7 @@ require (
 	github.com/godbus/dbus/v5 v5.2.2
 	github.com/lrstanley/bubblezone v1.0.0
 	github.com/mattn/go-runewidth v0.0.19
+	github.com/mattn/go-sixel v0.0.11
 	github.com/pelletier/go-toml/v2 v2.2.4
 	github.com/rmhubbert/bubbletea-overlay v0.6.3
 	golang.org/x/image v0.36.0
@@ -44,6 +45,7 @@ require (
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/sergeymakinen/go-bmp v1.0.0 // indirect
 	github.com/sergeymakinen/go-ico v1.0.0 // indirect
+	github.com/soniakeys/quant v1.0.0 // indirect
 	github.com/tadvi/systray v0.0.0-20190226123456-11a2b8fa57af // indirect
 	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect
 	golang.org/x/sys v0.41.0 // indirect

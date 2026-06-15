@@ -14,7 +14,6 @@ import (
 	"github.com/atotto/clipboard"
 	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"
-	"github.com/charmbracelet/x/mosaic"
 	"github.com/gen2brain/beeep"
 	zone "github.com/lrstanley/bubblezone"
 )
@@ -469,7 +468,7 @@ func (m model) handleCoverArt(msg coverArtMsg) (tea.Model, tea.Cmd) {
 	width, height := calculateCoverArtSize(m)
 
 	m.coverArt = msg.img
-	m.coverMosaic = mosaic.New().Width(width).Height(height)
+	m.coverRenderer = NewMosaicRenderer(width, height)
 	return m, nil
 }
 
